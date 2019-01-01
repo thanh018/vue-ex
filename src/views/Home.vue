@@ -2,6 +2,7 @@
   <div class="home-page">
 
     <Banner />
+    <Post />
 
     <div class="container page">
       <div class="row">
@@ -30,11 +31,13 @@
 <script>
 import Banner from '@/components/Banner'
 import Articles from '@/components/Articles'
+import Post from '@/components/Post'
 export default {
   name: 'Home',
   components: {
     Banner,
-    Articles
+    Articles,
+    Post
   }
 }
 </script>

@@ -3,23 +3,12 @@
     <div class="container">
       <a class="navbar-brand" href="index.html">conduit</a>
       <ul class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <!-- Add "active" class when you're on that page" -->
-          <a class="nav-link active" href="">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="ion-compose"></i>&nbsp;New Post
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="ion-gear-a"></i>&nbsp;Settings
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Sign up</a>
-        </li>
+        
+        <router-link to="/">Home</router-link>
+        <router-link to="/login">Login</router-link>
+        <li v-for="(data, index) in skills" :key='index'>{{index}}. {{data.skill}}</li>
+        <p v-if="skills.length > 2">you have more than 1 skill</p>
+        <p v-else>you have less than or equal to 1 skill</p>
       </ul>
     </div>
   </nav>
@@ -27,6 +16,14 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data() {
+    return {
+      skills: [
+        { "skill": "Vue.js"},
+        { "skill": "Front end"}
+      ]
+    }
+  }
 }
 </script>
