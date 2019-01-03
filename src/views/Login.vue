@@ -15,15 +15,15 @@
 
           <form>
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Your Name">
+              <input class="form-control form-control-lg" type="text" v-model="user.username" placeholder="Your Name">
             </fieldset>
+            <!-- <fieldset class="form-group">
+              <input class="form-control form-control-lg" type="text"  placeholder="Email">
+            </fieldset> -->
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Email">
+              <input class="form-control form-control-lg" type="password" v-model="user.password" placeholder="Password">
             </fieldset>
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="password" placeholder="Password">
-            </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">
+            <button class="btn btn-lg btn-primary pull-xs-right" type="button" v-on:click="login()">
               Sign up
             </button>
           </form>
@@ -35,8 +35,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Login',
-  
+  computed: {
+    ...mapState('login', ['user'])
+  },
+  mounted() {
+    this.getUser()
+  },
+  methods: {
+    ...mapActions('login', ['getUser'])
+  }
+
 }
 </script>

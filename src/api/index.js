@@ -10,5 +10,9 @@ export const ApiService = {
   get (url, slug = '') {
     return axios.get(`${url}/${slug}`)
       .catch((error) => console.log(error))
+  },
+  post(url, params) {
+    return axios.post(`${url}`, params)
+      .catch((error) => console.log(error))
   }
 }

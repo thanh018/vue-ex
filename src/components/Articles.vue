@@ -10,20 +10,20 @@
         </li>
       </ul>
     </div>
-    <div class="article-preview">
+    <div v-for="(item, index) in articles" :key="index" class="article-preview">
       <div class="article-meta">
-        <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+        <a href="profile.html"><img :src="item.author.image" /></a>
         <div class="info">
-          <a href="" class="author">Eric Simons</a>
-          <span class="date">January 20th</span>
+          <a href="" class="author">{{item.author.username}}</a>
+          <span class="date">{{item.createdAt}}</span>
         </div>
         <button class="btn btn-outline-primary btn-sm pull-xs-right">
           <i class="ion-heart"></i> 29
         </button>
       </div>
       <a href="" class="preview-link">
-        <h1>How to build webapps that scale</h1>
-        <p>This is the description for the post.</p>
+        <h1>{{item.title}}</h1>
+        <p>{{item.description}}</p>
         <span>Read more...</span>
       </a>
     </div>
@@ -31,7 +31,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  name: 'Articles'
+  name: 'Articles',
+  computed: {
+    ...mapState('articles', ['articles', 'abc'])
+  },
+  mounted() {
+    this.getArticles()
+  },
+  methods: {
+    ...mapActions('articles', ['getArticles'])
+  }
 }
 </script>
