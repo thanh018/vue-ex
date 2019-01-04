@@ -3,24 +3,40 @@ export default {
   namespaced: true,
   state: {
     user: {
-      username: "",
-      password: ""
+      username: null,
+      email: null,
+      password: null
     }
   },
   getters: {
-
+    getUser(state) {
+      return state.user
+    }
   },
   mutations: {
-    setUser(state, data) {
+    setUsers(state, data) {
       state.user = data
     }
   },
   actions: {
-    getUser(context) {
-      ApiService.post('articles').then(res => {
-        console.log(res.data);
-        return context.commit('setUser', res.data.user)
+    sendUser(context, user) {
+      console.log(user)
+      ApiService.post('users/login', {user: user }).then(response => {
+        console.log('response', response.data.user)
+        context.commit('setUsers', response.data.user)
+        ApiService.setToken(response.data.user.token)
       })
+    },
+    getUserLogin(context) {
+      var token = localStorage.getItem('loginToken');
+      if(token) {
+        ApiService.setHeaderAuthen(token);
+        return new Promise(() => {
+          ApiService.get('user').then(response => {
+            context.commit('setUsers', response.data.user)
+          })
+        })
+      }
     }
   }
 }

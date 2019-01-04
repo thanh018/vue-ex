@@ -13,6 +13,16 @@ export const ApiService = {
   },
   post(url, params) {
     return axios.post(`${url}`, params)
-      .catch((error) => console.log(error))
+  },
+  setToken(token) {
+    if(token) {
+      localStorage.setItem('loginToken', JSON.stringify(token))
+    }
+  },
+  getToken(token) {
+    return localStorage.getItem(token)
+  },
+  setHeaderAuthen(token) {
+    axios.defaults.headers.common['Authorization'] = `Token ${token}`
   }
 }

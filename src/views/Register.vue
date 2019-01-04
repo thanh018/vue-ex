@@ -3,9 +3,9 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Login</h1>
+          <h1 class="text-xs-center">Sign up</h1>
           <p class="text-xs-center">
-            <a href="">You dont have any account?</a>
+            <a href="">Have an account?</a>
           </p>
           <ul class="error-messages">
             <li>That email is already taken</li>
@@ -39,7 +39,7 @@
               />
             </fieldset>
             <button type="submit" class="btn btn-lg btn-primary pull-xs-right">
-              Login
+              Sign up
             </button>
           </form>
         </div>
@@ -47,22 +47,20 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'Login',
+  name: 'Register',
   computed: {
-    ...mapState('login', ['user'])
+    ...mapState('register', ['user'])
   },
   methods: {
-    ...mapActions('login', ['sendUser']),
+    ...mapActions('register', ['sendUser']),
     checkUser(user) {
       this.sendUser(user).then(response => {
-        this.$router.push('/')
-        console.log('response', response)
-      })
+        console.log('response ', response)
+      });
     }
   }
 }
