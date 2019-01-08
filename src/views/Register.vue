@@ -53,12 +53,13 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Register',
   computed: {
-    ...mapState('register', ['user'])
+    ...mapState('login', ['user', 'currentUser'])
   },
   methods: {
-    ...mapActions('register', ['sendUser']),
+    ...mapActions('login', ['sendRegister']),
     checkUser(user) {
-      this.sendUser(user).then(response => {
+      this.sendRegister(user).then(response => {
+        this.$router.push('/')
         console.log('response ', response)
       });
     }

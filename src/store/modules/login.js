@@ -6,20 +6,29 @@ export default {
       username: null,
       email: null,
       password: null
-    }
+    },
+    currentUser: {}
   },
   getters: {
     getUser(state) {
-      return state.user
+      return state.currentUser
     }
   },
   mutations: {
     setUsers(state, data) {
-      state.user = data
+      state.currentUser = data
     }
   },
   actions: {
-    sendUser(context, user) {
+    sendRegister(context, user) {
+      console.log(user)
+      ApiService.post('users', { user : user }).then(response => {
+        console.log('response ', response)
+        context.commit('setUsers', response.data.user)
+        ApiService.setToken(response.data.user.token)
+      })
+    },
+    sendLogin(context, user) {
       console.log(user)
       ApiService.post('users/login', {user: user }).then(response => {
         console.log('response', response.data.user)
@@ -28,15 +37,23 @@ export default {
       })
     },
     getUserLogin(context) {
-      var token = localStorage.getItem('loginToken');
+      var token = localStorage.getItem('loginToken')
       if(token) {
-        ApiService.setHeaderAuthen(token);
+        ApiService.setHeaderAuthen(token)
         return new Promise(() => {
           ApiService.get('user').then(response => {
             context.commit('setUsers', response.data.user)
           })
         })
       }
+    },
+    logOut(context) {
+      localStorage.setItem('loginToken', '')
+      return new Promise(() => {
+        ApiService.get('user').then(() => {
+          context.commit('setUsers', '')
+        })
+      })
     }
   }
 }

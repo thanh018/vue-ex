@@ -16,11 +16,11 @@ export const ApiService = {
   },
   setToken(token) {
     if(token) {
-      localStorage.setItem('loginToken', JSON.stringify(token))
+      localStorage.setItem('loginToken', token)
     }
   },
-  getToken(token) {
-    return localStorage.getItem(token)
+  getToken() {
+    return localStorage.getItem('loginToken')
   },
   setHeaderAuthen(token) {
     axios.defaults.headers.common['Authorization'] = `Token ${token}`
