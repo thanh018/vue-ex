@@ -3,6 +3,7 @@ import Vuex from "vuex"
 import articles from './modules/articles'
 import login from './modules/login'
 import example from './modules/example'
+import card from './modules/card'
 
 Vue.use(Vuex)
 const state = {}
@@ -12,7 +13,8 @@ const actions = {}
 const modules = {
   articles,
   login,
-  example
+  example,
+  card
 }
 
 export default new Vuex.Store({

@@ -1,17 +1,31 @@
 <template>
   <div>
     <form @submit.prevent="addPost">
-      <p><input type="text" v-model="postBody" value=""></p>
-      <p><textarea v-model="postTitle" value=""></textarea></p>
+      <p>
+        <input
+          type="text"
+          value=""
+          v-model="postBody"
+        >
+      </p>
+      <p>
+        <textarea
+          type="text"
+          value=""
+          v-model="postTitle"
+        >
+        </textarea>
+      </p>
       <p><button type="submit">Submit</button></p>
       
       <p v-if="errors.length" style="color: red">
         <b>Please correct the following error(s):</b>
         <ul>
-          <li v-for="(error, index) in errors" :key='index'>{{ error }}</li>
+          <li v-for="(error, index) in errors" :key='index'>
+            {{ error }}
+          </li>
         </ul>
       </p>
-
     </form>
 
     
@@ -41,12 +55,12 @@ export default {
   created() {
     axios
       .get(`http://localhost:3000/posts`)
-      .then(res => {
-        this.posts = res.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-      });
+        .then(res => {
+          this.posts = res.data
+        })
+        .catch(e => {
+          this.errors.push(e)
+        });
   },
   methods: {
     async addPost(e) {
