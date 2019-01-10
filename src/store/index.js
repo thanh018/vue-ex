@@ -1,8 +1,8 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import articles from './modules/articles'
-import register from './modules/register'
 import login from './modules/login'
+import example from './modules/example'
 
 Vue.use(Vuex)
 const state = {}
@@ -11,8 +11,8 @@ const mutations = {}
 const actions = {}
 const modules = {
   articles,
-  register,
-  login
+  login,
+  example
 }
 
 export default new Vuex.Store({

@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-
+    <Example />
     <Banner />
     <Post />
 
@@ -32,12 +32,14 @@
 import Banner from '@/components/Banner'
 import Articles from '@/components/Articles'
 import Post from '@/components/Post'
+import Example from '@/components/Example'
 export default {
   name: 'Home',
   components: {
     Banner,
     Articles,
-    Post
+    Post,
+    Example
   }
 }
 </script>
